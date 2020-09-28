@@ -95,16 +95,26 @@ public class LRUCache {
         map.put(key, node);
     }
 
+    //使用LinkedHashMap实现LRU缓存机制
+    //注意：必须重写removeEldestEntry()方法
+    static Map<String, String> linkMap = new LinkedHashMap<String, String>(5, 0.75f, true){
+        @Override
+        protected boolean removeEldestEntry(Map.Entry<String, String> eldest) {
+            return size() > 5;
+        }
+    };
+
     public static void main(String[] args) {
-        LRUCache cache = new LRUCache(2);
-        cache.put(1, 1);
-        cache.put(2, 2);
-        System.out.println(cache.get(1));
-        cache.put(3, 3);
-        System.out.println(cache.get(2));
-        cache.put(4, 4);
-        System.out.println(cache.get(1));
-        System.out.println(cache.get(3));
-        System.out.println(cache.get(4));
+        linkMap.put("1", "1");
+        linkMap.put("2", "2");
+        linkMap.put("3", "3");
+        linkMap.put("4", "4");
+        linkMap.put("5", "5");
+        System.out.println(linkMap.toString());
+
+        linkMap.put("6", "6");
+        System.out.println(linkMap.toString());
+        linkMap.get("3");
+        System.out.println(linkMap.toString());
     }
 }

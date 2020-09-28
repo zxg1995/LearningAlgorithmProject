@@ -5,8 +5,28 @@ package advanced_class_01;
  */
 public class Manacher_Algorithm {
     public static void main(String[] args) {
-        String a = "a";
-        System.out.println(longestPalindrome(a));
+        String a = "sadadapos";
+        System.out.println(TraditionalMethod(a));
+    }
+
+    //利用双指针的传统方法，时间复杂度为O(n^2)
+    private static String TraditionalMethod(String s){
+        String res = "";
+        for (int i = 0; i < s.length(); i++){
+            String s1 = palindrome(s, i, i);
+            String s2 = palindrome(s, i, i+1);
+            res = res.length() > s1.length() ? res : s1;
+            res = res.length() > s2.length() ? res : s2;
+        }
+        return res;
+    }
+
+    private static String palindrome(String s, int l, int r) {
+        while (l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)){
+            l--;
+            r++;
+        }
+        return s.substring(l+1, r);
     }
 
     private static String longestPalindrome(String s) {

@@ -63,5 +63,8 @@ public class Util {
 //        ArrayList<Integer> al = new ArrayList<>();
         String s = "a";
         System.out.println(s.substring(1));
+
+        //当字符串中的的空白分别为：单个空格，两个空格，tab制表符时，采用这种方式进行分割
+        String[] strings = s.split("\\s+");
     }
 }

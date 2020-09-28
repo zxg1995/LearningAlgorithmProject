@@ -4,8 +4,26 @@ import java.util.Stack;
 
 /**
  * Created by Paul Z on 2020/2/21
+ *
+ *   剑指 Offer 31. 栈的压入、弹出序列
+ *  输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。
  */
 public class IsPopOrder {
+
+    private static boolean isPopOrder2(int[] pushed, int[] popped) {
+        if (pushed.length != popped.length)
+            return false;
+        Stack<Integer> stack = new Stack<>();
+        int i = 0;
+        for (int x : pushed){
+            stack.push(x);
+            while (!stack.isEmpty() && stack.peek() == popped[i]){
+                stack.pop();
+                i++;
+            }
+        }
+        return stack.isEmpty();
+    }
 
     private static boolean isPopOrder(int[] pushA, int[] popA){
         if (popA == null || pushA == null)
